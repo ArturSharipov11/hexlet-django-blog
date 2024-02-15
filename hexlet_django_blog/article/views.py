@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views import View
 
-def index(request):
-    return HttpResponse('article')
 
-# Create your views here.
+class IndexView(View):
+    def get(self, request, tags, article_id):
+        context = {
+            'text': f"Статья номер {article_id}. Тег {tags}"
+        }
+        return render(request, 'articles.html', context=context)
